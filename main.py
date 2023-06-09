@@ -17,3 +17,4 @@ probs = clip_representations(images, caption)
 ids = ((-probs).argsort()[:n_matches]).tolist()
 visualise_top_images(images[ids], probs[ids])
 
+
