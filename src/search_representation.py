@@ -18,9 +18,10 @@ def latency_wrapper(func):
 
 @latency_wrapper
 def search_frames(images, caption):
-	model, preprocess = clip.load("RN101")
-	images_preprocessed = [preprocess(Image.open(image)).unsqueeze(0) for image in images]
-	text = clip.tokenize(caption)
+	device = "cuda" if torch.cuda.is_available() else "cpu"
+	model, preprocess = clip.load("RN101", device=device)
+	images_preprocessed = [preprocess(Image.open(image)).unsqueeze(0).to(device) for image in images]
+	text = clip.tokenize(caption).to(device)
 
 	with torch.no_grad():
 		logits = []
@@ -28,6 +29,6 @@ def search_frames(images, caption):
 			logits_img, logits_text = model(img, text)
 			logits.append(logits_img)
 		logits = torch.tensor(logits)
-		probs = logits.softmax(dim=-1).numpy()
+		#probs = logits.softmax(dim=-1).numpy()
 	return logits
 

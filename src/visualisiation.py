@@ -13,6 +13,6 @@ def visualise_top_images(images, scores):
         plt.imshow(image)
         plt.axis("off")
         plt.title(f"Rank {idx + 1}", fontsize=12)
-    plt.savefig("red_shirt_man.jpg")
-    plt.show()
+    plt.savefig("pic.jpg")
+    #plt.show()
 
