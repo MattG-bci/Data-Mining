@@ -14,5 +14,5 @@ def visualise_top_images(images, scores):
         plt.axis("off")
         plt.title(f"Rank {idx + 1}", fontsize=12)
     plt.savefig("pic.jpg")
-    #plt.show()
+
 
