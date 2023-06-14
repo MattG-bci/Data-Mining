@@ -12,5 +12,7 @@ def visualise_top_images(images, scores):
         image = np.array(Image.open(image))
         plt.imshow(image)
         plt.axis("off")
-        plt.title(f"Matching score: {score:.4f} / Rank {idx + 1}", fontsize=10)
+        plt.title(f"Rank {idx + 1}", fontsize=12)
+    plt.savefig("red_shirt_man.jpg")
     plt.show()
+

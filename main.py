@@ -1,7 +1,7 @@
 import argparse
 import os
 import numpy as np
-from src.search_representation import clip_representations
+from src.search_representation import search_frames
 from src.visualisiation import visualise_top_images
 
 parser = argparse.ArgumentParser(description="Find the most matching frames to the caption...")
@@ -13,7 +13,7 @@ n_matches = args.matches
 
 path = "./utils/data/"
 images = np.array([path + image for image in os.listdir(path)])
-probs = clip_representations(images, caption)
+probs = search_frames(images, caption)
 ids = ((-probs).argsort()[:n_matches]).tolist()
 visualise_top_images(images[ids], probs[ids])
 
