@@ -9,7 +9,7 @@ def extract_objects(df):
     object_tags = []
     for row in df.iterrows():
         labels = row[1][-1]
-        if labels is None: # checking for nan
+        if labels is None: # checking for None
             continue
         objects = list(set([i["category"] for i in row[1][-1]]))
         object_tags.append(objects)
