@@ -3,7 +3,7 @@ import os
 import numpy as np
 from src.search_representation import search_frames
 from src.visualisiation import visualise_top_images
-from src.metrics import window_accuracy
+from src.metrics import window_precision
 
 parser = argparse.ArgumentParser(description="Find the most matching frames to the caption...")
 parser.add_argument("--caption", "-text")
@@ -25,9 +25,11 @@ probs = search_frames(images, caption)
 ids = ((-probs).argsort()[:n_matches]).tolist()
 
 tagged_imgs = np.array([image for image in os.listdir(path)])
-tag_path = "/home/efs/datasets/BDD/bdd100k/labels/det_20/det_train.json"
-acc = window_accuracy(tag_path, caption, ids, tagged_imgs)
-print(f"The accuracy of the tag captioning is: {acc:.4f}")
+train_path = "./src/pq_labels/det_train.parquet"
+val_path = "./src/pq_labels/det_val.parquet"
+
+precision = window_precision([train_path, val_path], caption, ids, tagged_imgs)
+print(f"The precision of the tag captioning is: {precision:.4f}")
 
 visualise_top_images(images[ids], probs[ids])
 
