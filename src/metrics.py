@@ -3,12 +3,7 @@ from .structure_data import *
 import time
 
 
-def window_precision(paths, caption, ids, imgs):
-    df_train = concatenate_tags(paths[0])
-    df_val = concatenate_tags(paths[1])
-
-    df = pd.concat([df_train, df_val])
-    caption = caption.lower()
+def window_precision(df, caption, ids, imgs):
     tp = 0
     fp = 0
     tn = 0

@@ -16,7 +16,7 @@ def latency_wrapper(func):
 	return timeit
 
 
-def search_model(backbone, device):
+def load_model(backbone, device):
 	model, preprocess = clip.load(backbone, device=device)
 	return model, preprocess
 
@@ -31,5 +31,5 @@ def search_frames(images, caption, model):
 		images.detach()
 		text.detach()
 
-	return logits_img
+	return logits_img.cpu().numpy()
 
