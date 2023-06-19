@@ -25,16 +25,16 @@ def process_caption(caption):
 
 caption = process_caption(caption.lower())
 
-#config_path = "./config/config_files"
-#df = import_configured_parquets(config_path)
+config_path = "./config/config_files"
+df = import_configured_parquets(config_path)
 
 #### Original lines for the BDD data ###
-train_path = "./src/pq_labels/det_train_new.parquet"
-val_path = "./src/pq_labels/det_val_new.parquet"
+#train_path = "./src/pq_labels/det_train_new.parquet"
+#val_path = "./src/pq_labels/det_val_new.parquet"
 
-df_train = concatenate_tags(train_path)
-df_val = concatenate_tags(val_path)
-df = pd.concat([df_train, df_val])
+#df_train = concatenate_tags(train_path)
+#df_val = concatenate_tags(val_path)
+#df = pd.concat([df_train, df_val])
 ### END ###
 
 n_samples = int(input(f"How many samples do you wish to consider (max: {len(df)})?: "))
@@ -48,7 +48,7 @@ def _convert_image_to_rgb(image):
     return image.convert("RGB")
 
 transform = transforms.Compose([
-    transforms.Resize((224, 224), interpolation=transforms.InterpolationMode.BICUBIC),
+    transforms.Resize((224), interpolation=transforms.InterpolationMode.BICUBIC),
     transforms.CenterCrop((224, 224)),
     _convert_image_to_rgb,
     transforms.ToTensor(),
