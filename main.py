@@ -25,18 +25,21 @@ def process_caption(caption):
         caption = caption.replace("_", " ")
     return caption
 
+def tag_detected(x):
+    return np.where(x >= 26.5, "Tag Discovered", "Tag Not Discovered")
+
 caption = process_caption(caption.lower())
 
-config_path = "./config/config_files"
-df = import_configured_parquets(config_path)
+#config_path = "./config/config_files"
+#df = import_configured_parquets(config_path)
 
 #### Original lines for the BDD data ###
-#train_path = "./src/pq_labels/det_train_new.parquet"
-#val_path = "./src/pq_labels/det_val_new.parquet"
+train_path = "./src/pq_labels/det_train_new.parquet"
+val_path = "./src/pq_labels/det_val_new.parquet"
 
-#df_train = concatenate_tags(train_path)
-#df_val = concatenate_tags(val_path)
-#df = pd.concat([df_train, df_val])
+df_train = concatenate_tags(train_path)
+df_val = concatenate_tags(val_path)
+df = pd.concat([df_train, df_val])
 ### END ###
 
 n_samples = int(input(f"How many samples do you wish to consider (max: {len(df)})?: "))
@@ -71,17 +74,11 @@ for i_batch, sample_batched in enumerate(dataloader):
 print(f"Time executed: {(time.time() - start):.4f} seconds")
 
 ids = ((-logits).argsort()[:n_matches]).tolist()
+tags = tag_detected(logits[ids])
 
-def softmax(x, temp):
-    return np.exp(x / temp) / (np.sum(np.exp(x / temp), axis=0))
 
-temp = 1.0
+plot_histogram(logits[ids])
 
-print(logits[ids])
-print(softmax(logits[ids], temp=temp))
-
-#plot_histogram(logits[ids])
-
-visualise_top_images(images[ids], softmax(logits[ids], temp=temp))
+visualise_top_images(images[ids], logits[ids], tags)
 
 

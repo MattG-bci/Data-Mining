@@ -4,10 +4,10 @@ import numpy as np
 import math
 import matplotlib.gridspec as gridspec
 
-def visualise_top_images(images, scores):
+def visualise_top_images(images, scores, tags):
     n_img = len(images)
     n_rows = n_img // 2
-    plt.rcParams["figure.figsize"] = [20, 20]
+    plt.rcParams["figure.figsize"] = [20 + n_img, 20 + n_img]
     plt.rcParams["figure.autolayout"] = False
     gs1 = gridspec.GridSpec(n_rows, 2)
     plt.title(f"Top {n_img} matches", fontsize=10)
@@ -17,10 +17,11 @@ def visualise_top_images(images, scores):
         image = np.array(Image.open(image))
         plt.imshow(image)
         plt.axis("off")
-        plt.title(f"Rank {idx + 1} / Score: {score:.3f}", fontsize=20)
+        plt.title(f"Rank {idx + 1} / Score: {score:.3f} / {tags[idx]}", fontsize=20 + int(n_img/6))
         plt.gca().set_aspect("auto")
     plt.subplots_adjust(wspace=0.1, hspace=0.2)
     plt.savefig("pic.jpg")
+    plt.close()
 
 
 def plot_histogram(d):
@@ -36,3 +37,4 @@ def plot_histogram(d):
 # Set a clean upper y-axis limit.
     plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
     plt.savefig("histogram.jpg")
+    plt.close()
