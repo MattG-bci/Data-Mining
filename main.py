@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 from src.search_representation import search_frames, load_model
-from src.visualisiation import visualise_top_images
+from src.visualisiation import visualise_top_images, plot_histogram
 from src.metrics import window_precision
 from utils.DataLoader import *
 from utils.from_configured_files import import_configured_parquets
@@ -12,6 +12,8 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 import warnings
 import time
+
+from scipy.stats import norm
 
 warnings.filterwarnings("ignore")
 
@@ -67,13 +69,19 @@ for i_batch, sample_batched in enumerate(dataloader):
 
 
 print(f"Time executed: {(time.time() - start):.4f} seconds")
+
 ids = ((-logits).argsort()[:n_matches]).tolist()
 
-#### To test the accuracy of the model ####
-#precision = window_precision(df, caption, ids, images)
-#print(f"The precision of the tag captioning is: {precision:.4f}")
-#### END ####
+def softmax(x, temp):
+    return np.exp(x / temp) / (np.sum(np.exp(x / temp), axis=0))
 
-visualise_top_images(images[ids], logits[ids])
+temp = 1.0
+
+print(logits[ids])
+print(softmax(logits[ids], temp=temp))
+
+#plot_histogram(logits[ids])
+
+visualise_top_images(images[ids], softmax(logits[ids], temp=temp))
 
 
