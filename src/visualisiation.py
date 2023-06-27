@@ -6,18 +6,23 @@ import matplotlib.gridspec as gridspec
 
 def visualise_top_images(images, scores, tags):
     n_img = len(images)
-    n_rows = n_img // 2
-    plt.rcParams["figure.figsize"] = [20 + n_img, 20 + n_img]
+
+    if n_img % 2 == 0:
+        n_rows = n_img // 2
+    else:
+        n_rows = n_img // 2 + 1
+
+    plt.rcParams["figure.figsize"] = [32 + n_img, 20 + 3 * (n_img // 1)]
     plt.rcParams["figure.autolayout"] = False
     gs1 = gridspec.GridSpec(n_rows, 2)
-    plt.title(f"Top {n_img} matches", fontsize=10)
+    plt.title(f"Top {n_img} matches", fontsize=20 + 2*int(n_img))
     plt.tight_layout()
     for idx, (image, score) in enumerate(zip(images, scores)):
         ax1 = plt.subplot(gs1[idx])
         image = np.array(Image.open(image))
         plt.imshow(image)
         plt.axis("off")
-        plt.title(f"Rank {idx + 1} / Score: {score:.3f} / {tags[idx]}", fontsize=20 + int(n_img/6))
+        plt.title(f"Rank {idx + 1} / Score: {score:.3f} / {tags[idx]}", fontsize=30 + 2 * int(n_img))
         plt.gca().set_aspect("auto")
     plt.subplots_adjust(wspace=0.1, hspace=0.2)
     plt.savefig("pic.jpg")
