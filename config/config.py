@@ -17,7 +17,7 @@ def configure_path(data_path):
     parquet_name = data_path.split("/")[-1]
     if not os.path.exists(config_path):
         os.mkdir(config_path)
-    parquet_file.to_parquet(f"./config/config_files/{parquet_name}.parquet", engine="fastparquet")
+    parquet_file.to_parquet(f"{config_path}/{parquet_name}.parquet", engine="fastparquet")
 
 if __name__ == "__main__":
     n_paths = int(input("\nHow many directories with data would you like to configure?: "))
