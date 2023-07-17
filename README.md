@@ -7,7 +7,7 @@
 
 ## The repository for the tag discovery in the autonomous vehicle (AV) data using CLIP model, a pre-trained foundation model. 
 
-This is part of Fusionride AI toolkit. In order to start using this repository, few steps are needed to be taken:
+This is part of Fusionride AI toolkit that utilises CLIP model delivered by OpenAI (original paper: https://arxiv.org/abs/2103.00020). In order to start using this repository, few steps are needed to be taken:
 
 
 ### 1. Installing the required packages

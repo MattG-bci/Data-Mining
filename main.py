@@ -20,7 +20,7 @@ from utils.process_files import concat_configured_parquets
 warnings.filterwarnings("ignore")
 
 
-config_path = "./test/pq_labels"#"./config/config_files"
+config_path = "./config/config_files"
 assert len(os.listdir(config_path)) > 0, \
     "No configuration files provided. Please execute config.sh file first to configure your data into parquet files."
 
