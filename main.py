@@ -49,7 +49,7 @@ dataset = CustomDataset(images, transform)
 dataloader = DataLoader(dataset, batch_size=512, shuffle=False, num_workers=4, pin_memory=True)
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-print(f"Running on {device}...")
+print(f"Running on {device.upper()}...")
 model, _ = load_model("ViT-B/16", device)
 logits = np.array([])
 start = time.time()
