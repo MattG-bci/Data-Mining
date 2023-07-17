@@ -1,7 +1,7 @@
 # Data-Mining
 
-<p allign="center">
-    <img src="./imgs/fusionride - logo.jpeg">
+<p align="center">
+    <img src="./imgs/fusionride - logo.jpeg" width="600px">
 </p>
 
 
