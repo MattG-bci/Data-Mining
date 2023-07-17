@@ -7,6 +7,7 @@ import pyarrow.parquet as pq
 
 def configure_path(data_path):
     paths = []
+    config_path = "./config/config_files"
     for root, dirs, files in os.walk(data_path, topdown=False):
         for name in files:
             path = os.path.join(root, name)
@@ -14,6 +15,8 @@ def configure_path(data_path):
     
     parquet_file = pd.DataFrame(data=paths, columns=["name"])
     parquet_name = data_path.split("/")[-1]
+    if not os.path.exists(config_path):
+        os.mkdir(config_path)
     parquet_file.to_parquet(f"./config/config_files/{parquet_name}.parquet", engine="fastparquet")
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ```
 
-These packages can also be installed manually one by one if there are any problems.
+These packages can also be installed manually one by one if there are any problems with this step.
 
 
 ### 2. Configuration
