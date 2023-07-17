@@ -4,9 +4,8 @@ import numpy as np
 import math
 import matplotlib.gridspec as gridspec
 
-def visualise_top_images(images, scores, tags):
+def visualise_top_images(images, scores, caption):
     n_img = len(images)
-
     if n_img % 2 == 0:
         n_rows = n_img // 2
     else:
@@ -22,24 +21,9 @@ def visualise_top_images(images, scores, tags):
         image = np.array(Image.open(image))
         plt.imshow(image)
         plt.axis("off")
-        plt.title(f"Rank {idx + 1} / Score: {score:.3f} / {tags[idx]}", fontsize=30 + 2 * int(n_img))
+        plt.title(f"Rank {idx + 1}", fontsize=30 + 2 * int(n_img))
         plt.gca().set_aspect("auto")
     plt.subplots_adjust(wspace=0.1, hspace=0.2)
-    plt.savefig("pic.jpg")
+    plt.savefig(f"./output visualisations/{caption}.jpg")
     plt.close()
 
-
-def plot_histogram(d):
-    # An "interface" to matplotlib.axes.Axes.hist() method
-    n, bins, patches = plt.hist(x=d, bins='auto', color='#0504aa',
-                            alpha=0.7, rwidth=0.85)
-    plt.grid(axis='y', alpha=0.75)
-    plt.xlabel('Value')
-    plt.ylabel('Frequency')
-    plt.title('My Very Own Histogram')
-    plt.text(23, 45, r'$\mu=15, b=3$')
-    maxfreq = n.max()
-# Set a clean upper y-axis limit.
-    plt.ylim(ymax=np.ceil(maxfreq / 10) * 10 if maxfreq % 10 else maxfreq + 10)
-    plt.savefig("histogram.jpg")
-    plt.close()

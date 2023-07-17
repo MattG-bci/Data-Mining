@@ -1,0 +1,8 @@
+#### Original lines for the BDD data ###
+train_path = "./test/pq_labels/det_train_new.parquet"
+val_path = "./test/pq_labels/det_val_new.parquet"
+
+df_train = concatenate_tags(train_path)
+df_val = concatenate_tags(val_path)
+df = pd.concat([df_train, df_val])
+### END ###

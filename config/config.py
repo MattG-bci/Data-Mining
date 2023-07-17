@@ -16,10 +16,8 @@ def configure_path(data_path):
     parquet_name = data_path.split("/")[-1]
     parquet_file.to_parquet(f"./config/config_files/{parquet_name}.parquet", engine="fastparquet")
 
-
-
 if __name__ == "__main__":
-    n_paths = int(input("\nHow many data paths would you like to configure?: "))
+    n_paths = int(input("\nHow many directories with data would you like to configure?: "))
     for _ in range(n_paths):
-        data_path = input("Please enter your full path here: ")
+        data_path = input("Please enter a full path to a directory here: ")
         configure_path(data_path)
