@@ -1,6 +1,6 @@
 # Data-Mining
 
-<p float="center">
+<p allign="center">
     <img src="./imgs/fusionride - logo.jpeg">
 </p>
 
