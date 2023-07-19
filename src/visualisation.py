@@ -24,6 +24,9 @@ def visualise_top_images(images, scores, caption):
         plt.title(f"Rank {idx + 1}", fontsize=30 + 2 * int(n_img))
         plt.gca().set_aspect("auto")
     plt.subplots_adjust(wspace=0.1, hspace=0.2)
-    plt.savefig(f"./output visualisations/{caption}.jpg")
+    out_path = "./output visualisations"
+    if not os.path.exist(out_path):
+        os.mkdir(out_path)
+    plt.savefig(f"{out_path}/{caption}.jpg")
     plt.close()
 

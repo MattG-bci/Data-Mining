@@ -13,7 +13,7 @@ from torchvision import transforms
 from PIL import Image
 
 from src.search_frames import search_frames, load_model
-from src.visualisiation import visualise_top_images
+from src.visualisation import visualise_top_images
 from src.text_preprocessing import process_caption
 from utils.CustomDataset import CustomDataset
 from utils.process_files import concat_configured_parquets
