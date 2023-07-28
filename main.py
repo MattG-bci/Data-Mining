@@ -18,7 +18,7 @@ from src.text_preprocessing import process_caption
 from utils.CustomDataset import CustomDataset
 from utils.process_files import concat_configured_parquets
 warnings.filterwarnings("ignore")
-
+np.random.seed(1)
 
 config_path = "./config/config_files"
 assert len(os.listdir(config_path)) > 0, \
@@ -32,7 +32,8 @@ df = concat_configured_parquets(config_path)
 n_samples = int(input(f"How many samples do you wish to consider (max: {len(df)})?: "))
 print("\n################ PROCESSING - PLEASE WAIT ################")
 
-df = df.iloc[0:n_samples, :]
+#df = df.iloc[0:n_samples, :]
+df = df.sample(n_samples)
 images = df.name.values
 
 def _convert_image_to_rgb(image):
