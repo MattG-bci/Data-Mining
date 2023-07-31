@@ -8,6 +8,7 @@ import torch
 import numpy as np
 import pandas as pd
 from nltk.corpus import stopwords
+from nuscenes.nuscenes import NuScenes
 from torch.utils.data import DataLoader
 from torchvision import transforms
 from PIL import Image
@@ -16,7 +17,7 @@ from src.search_frames import search_frames, load_model
 from src.visualisation import visualise_top_images
 from src.text_preprocessing import process_caption
 from utils.CustomDataset import CustomDataset
-from utils.process_files import concat_configured_parquets
+from utils.process_files import concat_configured_parquets, find_sample_tokens_from_paths, save_top_paths
 warnings.filterwarnings("ignore")
 np.random.seed(1)
 
@@ -60,6 +61,19 @@ for i_batch, sample_batched in enumerate(dataloader):
 
 print(f"Time elapsed: {(time.time() - start):.4f} seconds")
 ids = ((-logits).argsort()[:n_matches]).tolist()
-visualise_top_images(images[ids], logits[ids], caption)
+top_imgs = images[ids]
+visualise_top_images(top_imgs, logits[ids], caption)
 
 
+if __name__ == "__main__":
+    while True:
+        is_nuscenses = input("Is your dataset NuScenes? [y/n] ")
+        if is_nuscenses == "y":
+            save_top_paths(top_imgs)
+            find_sample_tokens_from_paths(top_imgs)
+            break
+        elif is_nuscenses == "n":
+            save_top_paths(top_imgs)
+            break
+        else:
+            print("Please enter either \"y\" or \"n\".")
