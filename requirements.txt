@@ -5,7 +5,7 @@ pyarrow==14.0.1
 numpy==1.24.3
 ftfy==6.1.1
 clip @ git+https://github.com/openai/CLIP.git
-pillow==9.5.0
+pillow==10.0.1
 -i https://download.pytorch.org/whl/cu117
 torch==2.0.1
 torchvision==0.15.2
